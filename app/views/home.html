@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="sidebar" ng-controller="MailListCtrl">
+    <h2>Inbox</h2>
+    <input id="inboxSearch" type="search" placeholder="Search Inbox" ng-model="search.$">
+    <div class="fetchingEmail" ng-show="fetchingEmail">
+      <h1><i class="fa fa-envelope swing animated infinite"></i></h1>
+    </div>
+    <ul>
+      <li email-listing email="mail" action="setSelectMail(selectedMail)" ng-repeat="mail in (email | limitTo: quantity | filter:search)" ng-click="setSelectedMail(mail)">
+      </li>
+    </ul>
+  </div>
+  <div class="content" ng-controller="ContentCtrl">
+    <div class="selectConversation" ng-show="!selectedMail">
+      <h2>Select a conversation</h2>
+      <h3>before I get <span class="highlight3">angry</span></h3>
+      <img src="../images/hulk1.png" alt="">
+    </div>
+    <div ng-show="selectedMail">
+      <form id="replyForm" ng-submit="sendEmailReply()" ng-show="showingReply">
+        <div>
+          <div class="replyField">
+            <span>To: <input type="email" ng-model="reply.to" placeholder=""></span>
+          </div>
+          <div class="replyField">
+            <textarea name="" id="" ng-model="reply.body">{{ reply.body }}</textarea>
+          </div>
+          <button class="button cancelButton replyButton" ng-click="toggleReply()"><i class="fa fa-remove"></i> Cancel</button>
+          <button class="button replyButton" ng-click="sendReply()"><i class="fa fa-paper-plane-o"></i> Send</button>
+        </div>
+      </form>
+      <div class="emailHeader">
+        <h3>
+        From: {{ selectedMail.name }} <span class="highlight3 smaller">{{ selectedMail.email | lowercase }}</span>
+        </h3>
+        <h4>
+        Subject: {{ selectedMail.company.catchPhrase }}
+        </h4>
+      </div>
+      <div class="emailBody">
+        <p>
+          Following is the dummy JSON used to populate this email:
+        </p>
+      <pre>{{ selectedMail | json }}</pre>
+      <h4>
+      Courtesy of <a href="http://jsonplaceholder.typicode.com" target="_blank">JSON Placeholder</a>
+      </h4>
+      <a ng-click="toggleReply()" class="button"><i class="fa fa-mail-reply"></i> Reply</a>
+    </div>
+  </div>
+</div>
+</div>

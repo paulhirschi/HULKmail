@@ -1,0 +1,49 @@
+<div class="container">
+  <form name="form" ng-submit="updateSettings()">
+    <fieldset>
+      <legend>Update Settings</legend>
+      <div>
+        <div class="formItem">
+          <label>Name</label>
+          <input type="text" placeholder="Name" name="name" ng-model="settings.name" ng-minlength=3 ng-maxlength=20 ng-pattern="/^[a-zA-Z]+$/" required>
+          <!-- Error handling for the Name label -->
+          <div class="formError" ng-show="form.name.$dirty && form.name.$invalid">
+            <div ng-show="form.name.$error.required">Please enter your name.</div>
+            <div ng-show="form.name.$error.minlength">Your name must be 3 or more characters.</div>
+            <div ng-show="form.name.$error.maxlength">Your name cannot be more than 20 characters.</div>
+            <div ng-show="form.name.$error.pattern">Your name can only contain letters.</div>
+          </div>
+          <!-- End error handling -->
+        </div>
+      </div>
+      <div>
+        <div class="formItem">
+          <label>Email</label>
+          <input type="email" placeholder="Email" name="email" ng-model="settings.email" required>
+          <!-- Error handling for email field -->
+          <div class="formError" ng-show="form.email.$dirty && form.email.$invalid">
+            <div ng-show="form.email.$error.required">Please enter your email address.</div>
+            <div ng-show="form.email.$error.email">That is not a valid email address.</div>
+          </div>
+          <!-- End error handling -->
+        </div>
+      </div>
+      <div>
+        <div class="formItem">
+          <label>Age</label>
+          <input type="number" placeholder="Age" name="age" ng-model="settings.age">
+          <!-- Error handling for age -->
+          <div class="formError" ng-show="form.age.$dirty && form.age.$invalid">
+            <div ng-show="form.age.$error.number">Please enter a numeric value for your age.</div>
+          </div>
+          <!-- End error handling -->
+        </div>
+      </div>
+      <div>
+        <div>
+          <button class="button" type="submit" ng-disabled="form.$dirty && form.$invalid">Update</button>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
